@@ -15,7 +15,7 @@ const Sidebar = () => {
   const normalLink = "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#F51997] rounded"
   return (
     <div>
-      <div className="block 2xl:hidden m-2 ml-4 mt-3 text-xl cursor-pointer"
+      <div className="block xl:hidden m-2 ml-4 mt-3 text-xl cursor-pointer"
       onClick={() => setShowSidebar((prev) => !prev)}>
         {showSidebar ? <ImCancelCircle/> : <AiOutlineMenu/>}
       </div>
@@ -33,8 +33,8 @@ const Sidebar = () => {
           </div>
           
           {!userProfile && (
-            <div>
-              <p className='text-gray-400 px-2 py-4 hidden xl:block'>Log in to like and comment on videos</p>
+            <div className='hidden xl:block'>
+              <p className='text-gray-400 px-2 py-4'>Log in to like and comment on videos</p>
               <div className="pr-4">
                 <GoogleLogin 
                 clientId=''
