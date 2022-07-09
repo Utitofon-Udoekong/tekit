@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import GoogleLogin from 'react-google-login'
+import {GoogleLogin} from '@react-oauth/google'
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai'
 import {ImCancelCircle} from 'react-icons/im'
 import Footer from './Footer'
@@ -20,7 +20,7 @@ const Sidebar = () => {
         {showSidebar ? <ImCancelCircle/> : <AiOutlineMenu/>}
       </div>
       {showSidebar && (
-        <div className="xl:w-400 w-20 flex flex-col justify-start mb-10 border-r-2 border-gary-100 xl:border-0 p-3">
+        <div className="w-full flex flex-col justify-start mb-10 border-r-2 border-gary-100 xl:border-0 p-3">
           <div className="xl:border-b-2 border-gray-200 xl:pb-4">
             <Link href="/">
               <div className={normalLink}>
@@ -36,7 +36,7 @@ const Sidebar = () => {
             <div className='hidden xl:block'>
               <p className='text-gray-400 px-2 py-4'>Log in to like and comment on videos</p>
               <div className="pr-4">
-                <GoogleLogin 
+                {/* <GoogleLogin 
                 clientId=''
                 render={(renderProps) => (
                   <button
@@ -48,7 +48,7 @@ const Sidebar = () => {
                 )}
                 onSuccess={() => {}}
                 onFailure={() => {}}
-                cookiePolicy='single_host_origin'/>
+                cookiePolicy='single_host_origin'/> */}
               </div>
             </div>
           )}
