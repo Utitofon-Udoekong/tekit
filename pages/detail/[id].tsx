@@ -16,8 +16,10 @@ interface IProps{
 
 const Detail = ({postDetails}: IProps) => {
   const [post, setPost] = useState(postDetails)
-  use
-  const videoRef = useRef(null)
+  const [isHover, setIsHover] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const [isVideoMuted, setIsVideoMuted] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
   if(!post) return null
   return (
     <div className='flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap '>
