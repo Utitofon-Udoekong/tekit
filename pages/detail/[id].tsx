@@ -19,7 +19,7 @@ interface IProps {
 
 const Detail = ({ postDetails }: IProps) => {
   const router = useRouter();
-  const {userProfile} = useAuthStore()
+  const {userProfile}: any = useAuthStore()
   const [post, setPost] = useState(postDetails);
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -39,6 +39,18 @@ const Detail = ({ postDetails }: IProps) => {
       videoRef.current.muted = isVideoMuted;
     }
   }, [post, isVideoMuted]);
+
+  const handleLike = async (like: boolean) => {
+    if(userProfile){
+      const {data} = await axios.put(`${BASE_URL}/api/like`,{
+        userId: userProfile._id,
+        postId: post._id,
+        like
+      })
+
+      setPost({...post, likes: data.likes})
+    }
+  }
   if (!post) return null;
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap ">
@@ -113,7 +125,11 @@ const Detail = ({ postDetails }: IProps) => {
           <p className="px-10 text-lg text-gray-600">{post.caption}</p>
           <div className="mt-10 px-10">
             {userProfile && (
-              <LikeButton />
+              <LikeButton 
+              likes={post.likes}
+                handleLike={() => handleLike(true)}
+                handleDislike={() => handleLike(false)}
+              />
             )}
           </div>
           <Comments/>
