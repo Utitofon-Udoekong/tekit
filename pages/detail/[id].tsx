@@ -9,6 +9,9 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import axios from "axios";
 import { BASE_URL } from "../../utils";
 import { Video } from "../../types";
+import useAuthStore from "../../store/authStore";
+import LikeButton from "../../components/LikeButton";
+import Comments from "../../components/Comments";
 
 interface IProps {
   postDetails: Video;
@@ -16,6 +19,7 @@ interface IProps {
 
 const Detail = ({ postDetails }: IProps) => {
   const router = useRouter();
+  const {userProfile} = useAuthStore()
   const [post, setPost] = useState(postDetails);
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -94,7 +98,7 @@ const Detail = ({ postDetails }: IProps) => {
             </div>
             <div>
               <Link href="/">
-                <div className="flex flex-col mt-3 gap-2">
+                <div className="flex flex-col gap-2">
                   <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                     {post.postedBy.userName}{" "}
                     <GoVerified className="text-blue-400 text-md" />
@@ -107,6 +111,12 @@ const Detail = ({ postDetails }: IProps) => {
             </div>
           </div>
           <p className="px-10 text-lg text-gray-600">{post.caption}</p>
+          <div className="mt-10 px-10">
+            {userProfile && (
+              <LikeButton />
+            )}
+          </div>
+          <Comments/>
         </div>
       </div>
     </div>
