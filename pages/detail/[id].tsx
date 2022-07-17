@@ -25,7 +25,7 @@ const Detail = ({ postDetails }: IProps) => {
       videoRef.current?.pause;
       setPlaying(false);
     } else {
-      videoRef?.current?.play;
+      videoRef.current?.play;
       setPlaying(true);
     }
   };
