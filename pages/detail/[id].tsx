@@ -15,6 +15,7 @@ interface IProps {
 }
 
 const Detail = ({ postDetails }: IProps) => {
+  const router = useRouter();
   const [post, setPost] = useState(postDetails);
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -30,16 +31,16 @@ const Detail = ({ postDetails }: IProps) => {
     }
   };
   useEffect(() => {
-    if(post && videoRef.current){
-      videoRef.current.muted = isVideoMuted
+    if (post && videoRef.current) {
+      videoRef.current.muted = isVideoMuted;
     }
-  },[post, isVideoMuted])
+  }, [post, isVideoMuted]);
   if (!post) return null;
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap ">
       <div className="relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center">
         <div className="absolute top-6 left-2 flex gap-6 z-50 lg:left-6">
-          <p>
+          <p className="cursor-pointer" onClick={() => router.back()}>
             <MdOutlineCancel className="text-white text-[35px]" />
           </p>
         </div>
@@ -72,6 +73,40 @@ const Detail = ({ postDetails }: IProps) => {
               <HiVolumeUp className="text-white text-2xl lg:text-4xl" />
             </button>
           )}
+        </div>
+      </div>
+      <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
+        <div className="lg:mt-20 mt-10">
+          <div className="flex items-center gap-3 p-2 cursor-pointer font-semibold rounded">
+            <div className="ml-4 md:w-20 md:h-20 w-16 h-16">
+              <Link href="/">
+                <>
+                  <Image
+                    width={62}
+                    height={62}
+                    className="rounded-full"
+                    src={post.postedBy.image}
+                    alt="Profile Photo"
+                    layout="responsive"
+                  />
+                </>
+              </Link>
+            </div>
+            <div>
+              <Link href="/">
+                <div className="flex flex-col mt-3 gap-2">
+                  <p className="flex gap-2 items-center md:text-md font-bold text-primary">
+                    {post.postedBy.userName}{" "}
+                    <GoVerified className="text-blue-400 text-md" />
+                  </p>
+                  <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
+                    {post.postedBy.userName}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <p className="px-10 text-lg text-gray-600">{post.caption}</p>
         </div>
       </div>
     </div>
