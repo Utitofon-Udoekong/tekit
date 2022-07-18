@@ -1,4 +1,6 @@
 import React from 'react'
+import {BiCommentX} from "react-icons/bi"
+import {MdOutlineVideocamOff} from "react-icons/md"
 
 interface IProps{
     text: string
@@ -6,7 +8,12 @@ interface IProps{
 
 const NoResults = ({text}: IProps) => {
   return (
-    <div>{text}</div>
+    <div className='flex flex-col justify-center w-full items-center h-full'>
+      <p className="text-8xl">
+        {text === 'No Comments yet' ? <BiCommentX/> : <MdOutlineVideocamOff/>}
+      </p>
+      <p className='text-2xl text-center'>{text}</p>
+    </div>
   )
 }
 
